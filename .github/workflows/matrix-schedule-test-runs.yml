@@ -11,7 +11,7 @@ jobs:
   schedule_tests:
     strategy:
       matrix:
-        sf_org_alias: [GREENHAMPROD,PAYMENTS2US]
+        sf_org_alias: [PAYMENTS2US]
 
     env:
         ENVIRONMENT: ${{ matrix.sf_org_alias }}
