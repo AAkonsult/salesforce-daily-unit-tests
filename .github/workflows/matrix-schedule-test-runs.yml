@@ -2,8 +2,8 @@ name: Schedule Test Runs
 
 on:
   schedule:
-    # Modify this to specify when the job should run. The below is daily at 12 AM GMT. 16 is 4am AEST
-    - cron: '0 16 * * *'
+    # Modify this to specify when the job should run. The below is daily at 12 AM GMT. 17 is 5am AEST
+    - cron: '0 17 * * *'
   # Allows the workflow to be run manually through the GitHub UI
   workflow_dispatch:
 
