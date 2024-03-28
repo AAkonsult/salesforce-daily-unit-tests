@@ -20,7 +20,19 @@ if (firstPart) {
 let summaryText = '';
 
 if(summary.outcome == 'Failed'){
-     summaryText = `❌   Automated unit testing for ${summary.username} (${hostname}) has *${summary.outcome}* with ${summary.testsRan} test runs and ${summary.failing} failure(s).`
+    //If any of the failed tests are because of a record lock, ignore it
+    var validFailCounter = 0;
+    for(const test of tests){
+        if(test.Outcome == 'Fail' && !test.Message.includes('UNABLE_TO_LOCK_ROW')){
+            validFailCounter++;
+        }
+    }
+    if(validFailCounter > 0) {
+        summary.failing = validFailCounter;
+        summaryText = `❌   Automated unit testing for ${summary.username} (${hostname}) has *${summary.outcome}* with ${summary.testsRan} test runs and ${summary.failing} failure(s).`
+    } else {
+        summaryText = `✅   Automated unit testing for ${summary.username} (${hostname}) has *${summary.outcome}* 🎉.`
+    }
 }
 else{
     summaryText = `✅   Automated unit testing for ${summary.username} (${hostname}) has *${summary.outcome}* 🎉.`
@@ -39,7 +51,7 @@ slackPayload.blocks.push(summaryBlock);
 
 for(const test of tests){
 
-    if(test.Outcome == 'Fail'){
+    if(test.Outcome == 'Fail' && !test.Message.includes('UNABLE_TO_LOCK_ROW')){
         
         let testText = `${test.FullName}: ${test.Message}`;
 
