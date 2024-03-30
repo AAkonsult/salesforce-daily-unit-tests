@@ -31,6 +31,7 @@ if(summary.outcome == 'Failed'){
         summary.failing = validFailCounter;
         summaryText = `❌   Automated unit testing for ${summary.username} (${hostname}) has *${summary.outcome}* with ${summary.testsRan} test runs and ${summary.failing} failure(s).`
     } else {
+        summary.outcome = passed;
         summaryText = `✅   Automated unit testing for ${summary.username} (${hostname}) has *${summary.outcome}* 🎉.`
     }
 }
