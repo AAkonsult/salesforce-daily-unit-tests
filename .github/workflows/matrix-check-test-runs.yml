@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        sf_org_alias: [GREENHAMPROD,PAYMENTS2US,LDC]
+        sf_org_alias: [GREENHAMPROD,PAYMENTS2US]
 
     env:
         ENVIRONMENT: ${{ matrix.sf_org_alias }}
